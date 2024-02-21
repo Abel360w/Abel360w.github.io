@@ -4,9 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const sitesList = document.getElementById("sitesList");
     const sites = document.getElementById("sites");
 
-    const username = localStorage.getItem("username");
-    const password = localStorage.getItem("password");
-    if (username && password) {
+    const registered = localStorage.getItem("registered");
+    if (registered) {
         // User is registered, show login form
         registerForm.style.display = "none";
         loginForm.style.display = "block";
@@ -17,30 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     document.getElementById("registerButton").addEventListener("click", function() {
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        registerForm.style.display = "none";
-        loginForm.style.display = "block";
-    });
-
-    document.getElementById("loginLink").addEventListener("click", function() {
+        localStorage.setItem("registered", "true");
         registerForm.style.display = "none";
         loginForm.style.display = "block";
     });
 
     document.getElementById("loginButton").addEventListener("click", function() {
-        const loginUsername = document.getElementById("loginUsername").value;
-        const loginPassword = document.getElementById("loginPassword").value;
-        if (loginUsername === username && loginPassword === password) {
-            // Login successful, show sites list
-            loginForm.style.display = "none";
-            sitesList.style.display = "block";
-            showSites();
-        } else {
-            alert("Invalid username or password");
-        }
+        loginForm.style.display = "none";
+        sitesList.style.display = "block";
+        showSites();
     });
 
     function showSites() {
