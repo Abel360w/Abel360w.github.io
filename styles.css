@@ -20,17 +20,24 @@ h2 {
     font-size: 24px;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-button:hover {
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
     background-color: #0056b3;
 }
