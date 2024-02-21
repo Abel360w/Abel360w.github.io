@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const siteFrame = document.getElementById("siteFrame");
     const sitesList = document.getElementById("sitesList");
     const sites = document.getElementById("sites");
 
@@ -12,9 +13,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.textContent = site.name;
-        a.href = site.url;
-        a.target = "_blank"; // Open links in a new tab
+        a.href = "#";
+        a.addEventListener("click", function(event) {
+            event.preventDefault();
+            openSite(site.url);
+        });
         li.appendChild(a);
         sites.appendChild(li);
     });
+
+    function openSite(url) {
+        siteFrame.src = url;
+        siteFrame.style.display = "block";
+        sitesList.style.display = "none";
+    }
 });
