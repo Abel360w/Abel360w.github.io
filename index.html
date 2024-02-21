@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FTP File List</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web App</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>FTP File List</h1>
-        <ul id="file-list"></ul>
+<div class="container">
+    <div id="registerForm">
+        <h2>Register</h2>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button id="registerButton">Register</button>
+        <button id="loginLink">Already registered? Login</button>
     </div>
-    
-    <script src="script.js"></script>
+    <div id="loginForm" style="display: none;">
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username"><br>
+        <input type="password" id="loginPassword" placeholder="Password"><br>
+        <button id="loginButton">Login</button>
+    </div>
+    <div id="sitesList" style="display: none;">
+        <h2>List of Sites</h2>
+        <ul id="sites"></ul>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
