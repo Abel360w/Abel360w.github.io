@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Connector</title>
-<link rel="stylesheet" href="styles.css">
+    <title>Anon Connect</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<div class="container">
-    <h1>Web Connector</h1>
-    <input type="text" id="urlInput" placeholder="Enter website URL" value="https://">
-    <button onclick="openWebsite()">Open Website</button>
-</div>
-<script src="script.js"></script>
+    <div class="container">
+        <h1>Welcome to the Anon Connect</h1>
+        <div id="registerDiv">
+            <h2>Register</h2>
+            <input type="text" id="registerUsername" placeholder="Username">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button id="registerBtn">Register</button>
+            <p>Already registered? <a href="#" id="showLogin">Login</a></p>
+        </div>
+        <div id="loginDiv" class="hidden">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button id="loginBtn">Login</button>
+        </div>
+        <div id="websiteDiv" class="hidden">
+            <h2>Enter Website URL</h2>
+<input type="text" id="websiteUrl" placeholder="Enter Website URL" value="https://">
+            <button id="openWebsiteBtn">Open Website</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
