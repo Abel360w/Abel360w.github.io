@@ -5,13 +5,6 @@ function loadWebsite() {
         return;
     }
 
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('webContent').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('webContent').innerText = 'An error occurred. Please try again.';
-        });
+    const webview = document.getElementById('webview');
+    webview.innerHTML = `<iframe src="${url}" width="100%" height="400px"></iframe>`;
 }
