@@ -5,8 +5,13 @@ function loadWebsite() {
         return;
     }
 
-    const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
-
-    const webview = document.getElementById('webview');
-    webview.innerHTML = `<iframe src="${proxyUrl}" width="100%" height="400px"></iframe>`;
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('webContent').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('webContent').innerText = 'An error occurred. Please try again.';
+        });
 }
