@@ -5,6 +5,8 @@ function loadWebsite() {
         return;
     }
 
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+
     const webview = document.getElementById('webview');
-    webview.innerHTML = `<iframe src="${url}" width="100%" height="400px"></iframe>`;
+    webview.innerHTML = `<iframe src="${proxyUrl}" width="100%" height="400px"></iframe>`;
 }
