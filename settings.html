@@ -36,13 +36,16 @@
 <body>
     <div class="container">
         <h1>Settings</h1>
-        <button id="clearCacheBtn">Clear History</button>
+        <button id="clearCacheBtn">Reset App</button>
     </div>
     <script>
         const clearCacheBtn = document.getElementById('clearCacheBtn');
         clearCacheBtn.addEventListener('click', function() {
-            localStorage.clear();
-            alert('History cleared successfully.');
+            if (confirm('Are you sure you want to reset the app? This will clear all app data and cannot be undone.')) {
+                localStorage.clear(); // Clear local storage
+                sessionStorage.clear(); // Clear session storage
+                window.location.reload(); // Reload the page to reset the app
+            }
         });
     </script>
 </body>
