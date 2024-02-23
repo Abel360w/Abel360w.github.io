@@ -31,12 +31,13 @@
         button:hover {
             background-color: #0056b3;
         }
-        .history {
+        .navbar {
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
-            text-align: left;
         }
-        .history-item {
-            margin-bottom: 10px;
+        .navbar button {
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -44,11 +45,6 @@
     <div class="container">
         <h1>Settings</h1>
         <button id="clearCacheBtn">Reset App</button>
-        <div class="history" id="history">
-            <h2>Visited Sites</h2>
-            <div id="historyList"></div>
-            <button id="clearHistoryBtn">Clear History</button>
-        </div>
     </div>
     <div class="navbar">
         <button id="historyBtn">History</button>
@@ -56,7 +52,7 @@
     <script>
         const clearCacheBtn = document.getElementById('clearCacheBtn');
         clearCacheBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to reset the app? This action will clear all app data including site visit history and cannot be undone.')) {
+            if (confirm('Are you sure you want to reset the app? This action will clear Your App Data (Remember This Will Only Reset Your username and Password Not the Site History That You visited)')) {
                 // Clear user credentials
                 localStorage.removeItem('username');
                 localStorage.removeItem('password');
@@ -69,29 +65,9 @@
 
         const historyBtn = document.getElementById('historyBtn');
         historyBtn.addEventListener('click', function() {
-            document.getElementById('history').style.display = 'block';
-            displayHistory();
+            // Handle history button click
+            alert('If You Want To Delete The Data Of The Sites You visited /Your History Go To The App Info And Clear Data. Thats All !');
         });
-
-        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
-        clearHistoryBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to clear all visited sites?')) {
-                localStorage.removeItem('history');
-                displayHistory();
-            }
-        });
-
-        function displayHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = '';
-            const history = JSON.parse(localStorage.getItem('history')) || [];
-            history.forEach(site => {
-                const item = document.createElement('div');
-                item.className = 'history-item';
-                item.textContent = site;
-                historyList.appendChild(item);
-            });
-        }
     </script>
 </body>
 </html>
