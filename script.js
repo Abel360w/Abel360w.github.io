@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (username === storedUsername && password === storedPassword) {
             loginDiv.classList.add('hidden');
             websiteDiv.classList.remove('hidden');
-            const proxyUrl = proxies[Math.floor(Math.random() * proxies.length)];
+            const proxyUrl = proxies[Math.floor(Math.random() * proxies.length)] + '/' + websiteUrlInput.value.trim();
             window.open(proxyUrl, '_blank');
         } else {
             alert('Invalid username or password. Please try again.');
