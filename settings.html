@@ -76,16 +76,11 @@
                 location.reload();
             }
         });
-
         const historyBtn = document.getElementById('historyBtn');
-historyBtn.addEventListener('click', function() {
-    // Open application info area
-    if (navigator.appInfo) {
-        navigator.appInfo.open();
-    } else {
-        alert('Could not open application info. Please clear data from the app settings.');
-    }
-});
+        historyBtn.addEventListener('click', function() {
+            // Handle history button click
+            alert('If You Want To Delete The Data Of The Sites You visited /Your History Go To The App Info And Clear Data. Thats All !');
+        });
         const helpBtn = document.getElementById('helpBtn');
         helpBtn.addEventListener('click', function() {
             alert('For opening some websites like YouTube, you would need to type their mobile URL like this: https://m.youtube.com');
