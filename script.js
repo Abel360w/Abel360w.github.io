@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const proxies = [
         'https://api.codetabs.com/v1/proxy/?quest=',
-        'https://api.codetabs.com/v1/proxy/?quest=',
-        'https://api.codetabs.com/v1/proxy/?quest='
     ];
 
     const registerDiv = document.getElementById('registerDiv');
@@ -52,8 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (username === storedUsername && password === storedPassword) {
             loginDiv.classList.add('hidden');
             websiteDiv.classList.remove('hidden');
-            const proxyUrl = proxies[Math.floor(Math.random() * proxies.length)] + websiteUrlInput.value.trim();
-            window.open(proxyUrl, '_blank');
         } else {
             alert('Invalid username or password. Please try again.');
         }
@@ -62,7 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
     openWebsiteBtn.addEventListener('click', function() {
         const websiteUrl = websiteUrlInput.value.trim();
         if (websiteUrl !== '') {
-            window.open(websiteUrl, '_blank');
+            const proxyUrl = proxies[Math.floor(Math.random() * proxies.length)] + websiteUrl;
+            window.open(proxyUrl, '_blank');
         }
     });
 });
