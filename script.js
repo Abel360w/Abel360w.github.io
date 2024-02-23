@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const proxies = [
-        'https://api.codetabs.com/v1/proxy/?quest=',
-    ];
-
     const registerDiv = document.getElementById('registerDiv');
     const loginDiv = document.getElementById('loginDiv');
     const websiteDiv = document.getElementById('websiteDiv');
@@ -58,8 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     openWebsiteBtn.addEventListener('click', function() {
         const websiteUrl = websiteUrlInput.value.trim();
         if (websiteUrl !== '') {
-            const proxyUrl = proxies[Math.floor(Math.random() * proxies.length)] + websiteUrl;
-            window.open(proxyUrl, '_blank');
+            window.open(websiteUrl, '_blank');
         }
     });
 });
