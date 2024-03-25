@@ -62,12 +62,12 @@
             max-height: 80%;
             overflow: auto;
             position: relative;
+            text-align: left;
         }
         .history-list {
             margin-top: 20px;
             padding: 0;
             list-style-type: none;
-            text-align: left;
         }
         .history-list li {
             margin-bottom: 10px;
@@ -121,7 +121,7 @@
             });
 
             historyBtn.addEventListener('click', function() {
-                historyPopup.style.display = 'block';
+                historyPopup.style.display = 'flex';
             });
 
             document.getElementById('clearHistoryBtn').addEventListener('click', function() {
