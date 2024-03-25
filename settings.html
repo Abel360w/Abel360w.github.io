@@ -62,12 +62,13 @@
             max-height: 80%;
             overflow: auto;
             position: relative;
-            text-align: left;
+            color: #000; /* Text color black */
         }
         .history-list {
             margin-top: 20px;
             padding: 0;
             list-style-type: none;
+            text-align: left;
         }
         .history-list li {
             margin-bottom: 10px;
@@ -83,7 +84,7 @@
     </div>
     <div class="history-popup" id="historyPopup" style="display: none;">
         <div class="history-popup-content">
-            <h2>Visited Sites</h2>
+            <h2 style="color: #000;">Visited Sites</h2>
             <ul id="historyList" class="history-list"></ul>
             <button id="clearHistoryBtn">Clear History</button>
             <button id="closeHistoryBtn">Close</button>
@@ -121,7 +122,7 @@
             });
 
             historyBtn.addEventListener('click', function() {
-                historyPopup.style.display = 'flex';
+                historyPopup.style.display = 'block';
             });
 
             document.getElementById('clearHistoryBtn').addEventListener('click', function() {
