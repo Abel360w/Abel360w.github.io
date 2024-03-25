@@ -126,7 +126,7 @@
             });
 
             document.getElementById('clearHistoryBtn').addEventListener('click', function() {
-                if (confirm('Are you sure you want to clear your browsing history?')) {
+                if (confirm('Are you sure you want to clear your browsing history? This Only Clear The List Of The Sites You Visited Not The Actual History For That Just Clear Data Of This App In App Info')) {
                     // Clear site visit history
                     localStorage.removeItem('history');
                     alert('Browsing history cleared successfully.');
