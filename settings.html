@@ -51,12 +51,22 @@
             color: #fff;
             margin-top: 20px;
         }
+        .history-list {
+            margin-top: 20px;
+            padding: 0;
+            list-style-type: none;
+            text-align: left;
+        }
+        .history-list li {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Settings</h1>
         <button id="clearCacheBtn">Reset App</button>
+        <ul id="historyList" class="history-list"></ul>
     </div>
     <div class="navbar">
         <button id="historyBtn">History</button>
@@ -64,26 +74,29 @@
     </div>
     <div class="footer"> Made by <strong>‎ Anon Co</strong> </div>
     <script>
-        const clearCacheBtn = document.getElementById('clearCacheBtn');
-        clearCacheBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to reset the app? This action will clear Your App Data (Remember This Will Only Reset Your username and Password Not the Site History That You visited)')) {
-                // Clear user credentials
-                localStorage.removeItem('username');
-                localStorage.removeItem('password');
-                // Clear site visit history
-                localStorage.removeItem('history');
-                alert('App reset successful. Reloading...');
-                location.reload();
-            }
-        });
-        const historyBtn = document.getElementById('historyBtn');
-        historyBtn.addEventListener('click', function() {
-            // Handle history button click
-            alert('If You Want To Delete The Data Of The Sites You visited / Your History Go To The App Info And Clear Data. Thats All !');
-        });
-        const helpBtn = document.getElementById('helpBtn');
-        helpBtn.addEventListener('click', function() {
-            alert('For opening some websites like YouTube, you would need to type their mobile URL like this: https://m.youtube.com');
+        document.addEventListener('DOMContentLoaded', function() {
+            const clearCacheBtn = document.getElementById('clearCacheBtn');
+            const historyList = document.getElementById('historyList');
+
+            // Load history from localStorage
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            history.forEach(site => {
+                const li = document.createElement('li');
+                li.textContent = site;
+                historyList.appendChild(li);
+            });
+
+            clearCacheBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset the app? This action will clear Your App Data (Remember This Will Only Reset Your username and Password Not the Site History That You visited)')) {
+                    // Clear user credentials
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                    // Clear site visit history
+                    localStorage.removeItem('history');
+                    alert('App reset successful. Reloading...');
+                    location.reload();
+                }
+            });
         });
     </script>
 </body>
