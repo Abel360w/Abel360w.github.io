@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const openWebsiteBtn = document.getElementById('openWebsiteBtn');
     const historyList = document.getElementById('historyList');
     const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    const resetAppBtn = document.getElementById('resetAppBtn');
+
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+        // Hide websiteDiv and settings link if not logged in
+        websiteDiv.classList.add('hidden');
+    }
 
     showLoginLink.addEventListener('click', function(event) {
         event.preventDefault();
@@ -46,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const storedUsername = localStorage.getItem('username');
         const storedPassword = localStorage.getItem('password');
         if (username === storedUsername && password === storedPassword) {
+            localStorage.setItem('isLoggedIn', 'true');
             loginDiv.classList.add('hidden');
             websiteDiv.classList.remove('hidden');
         } else {
@@ -56,33 +65,24 @@ document.addEventListener('DOMContentLoaded', function() {
     openWebsiteBtn.addEventListener('click', function() {
         const websiteUrl = websiteUrlInput.value.trim();
         if (websiteUrl !== '') {
-            // Save visited site to history
-            let history = JSON.parse(localStorage.getItem('history')) || [];
-            history.push(websiteUrl);
-            localStorage.setItem('history', JSON.stringify(history));
-            // Open website in new tab
             window.open(websiteUrl, '_blank');
-            // Update history list
-            updateHistoryList();
         }
     });
 
     clearHistoryBtn.addEventListener('click', function() {
         if (confirm('Are you sure you want to clear your browsing history?')) {
+            // Clear site visit history
             localStorage.removeItem('history');
-            updateHistoryList();
+            alert('Browsing history cleared successfully.');
+            historyList.innerHTML = '';
         }
     });
 
-    function updateHistoryList() {
-        let history = JSON.parse(localStorage.getItem('history')) || [];
-        historyList.innerHTML = '';
-        history.forEach(function(site) {
-            const li = document.createElement('li');
-            li.textContent = site;
-            historyList.appendChild(li);
-        });
-    }
-
-    updateHistoryList();
+    resetAppBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to reset the app? This action will clear your app data.')) {
+            // Clear all app data and redirect to register page
+            localStorage.clear();
+            location.href = 'index.html'; // Redirect to register page
+        }
+    });
 });
