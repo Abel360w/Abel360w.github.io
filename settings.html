@@ -28,19 +28,10 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            margin: 5px;
         }
         button:hover {
             background-color: #0056b3;
-        }
-        .navbar {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .navbar button {
-            margin: 0 10px;
-            padding: 12px 20px;
-            font-size: 14px;
         }
         .footer {
             display: flex;
@@ -50,6 +41,27 @@
             background-color: #222;
             color: #fff;
             margin-top: 20px;
+        }
+        .history-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .history-popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+            position: relative;
         }
         .history-list {
             margin-top: 20px;
@@ -65,13 +77,25 @@
 <body>
     <div class="container">
         <h1>Settings</h1>
-        <button id="clearCacheBtn">Clear History</button>
-        <ul id="historyList" class="history-list"></ul>
+        <button id="resetAppBtn">Reset App</button>
+        <button id="helpBtn">Help</button>
+        <button id="historyBtn">History</button>
+    </div>
+    <div class="history-popup" id="historyPopup" style="display: none;">
+        <div class="history-popup-content">
+            <h2>Visited Sites</h2>
+            <ul id="historyList" class="history-list"></ul>
+            <button id="clearHistoryBtn">Clear History</button>
+            <button id="closeHistoryBtn">Close</button>
+        </div>
     </div>
     <div class="footer"> Made by <strong>‎ Anon Co</strong> </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const clearCacheBtn = document.getElementById('clearCacheBtn');
+            const resetAppBtn = document.getElementById('resetAppBtn');
+            const helpBtn = document.getElementById('helpBtn');
+            const historyBtn = document.getElementById('historyBtn');
+            const historyPopup = document.getElementById('historyPopup');
             const historyList = document.getElementById('historyList');
 
             // Load history from localStorage
@@ -82,13 +106,35 @@
                 historyList.appendChild(li);
             });
 
-            clearCacheBtn.addEventListener('click', function() {
+            resetAppBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset the app? This action will clear Your App Data (Remember This Will Only Reset Your username and Password Not the Site History That You visited)')) {
+                    // Clear user credentials
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                    alert('App reset successful. Reloading...');
+                    location.reload();
+                }
+            });
+
+            helpBtn.addEventListener('click', function() {
+                alert('For opening some websites like YouTube, you would need to type their mobile URL like this: https://m.youtube.com');
+            });
+
+            historyBtn.addEventListener('click', function() {
+                historyPopup.style.display = 'block';
+            });
+
+            document.getElementById('clearHistoryBtn').addEventListener('click', function() {
                 if (confirm('Are you sure you want to clear your browsing history?')) {
                     // Clear site visit history
                     localStorage.removeItem('history');
                     alert('Browsing history cleared successfully.');
                     historyList.innerHTML = '';
                 }
+            });
+
+            document.getElementById('closeHistoryBtn').addEventListener('click', function() {
+                historyPopup.style.display = 'none';
             });
         });
     </script>
