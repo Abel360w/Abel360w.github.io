@@ -11,12 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('loginBtn');
     const websiteUrlInput = document.getElementById('websiteUrl');
     const openWebsiteBtn = document.getElementById('openWebsiteBtn');
-    const resetAppBtn = document.getElementById('resetAppBtn');
-    const settingsBtn = document.getElementById('settingsBtn');
-
-    // Hide settings button and websiteDiv initially
-    settingsBtn.style.display = 'none';
-    websiteDiv.style.display = 'none';
+    const historyList = document.getElementById('historyList');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 
     showLoginLink.addEventListener('click', function(event) {
         event.preventDefault();
@@ -39,8 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('password', password);
                 registerDiv.classList.add('hidden');
                 loginDiv.classList.remove('hidden');
-                // Show settings button after registration
-                settingsBtn.style.display = 'inline-block';
             }
         }
     });
@@ -53,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const storedPassword = localStorage.getItem('password');
         if (username === storedUsername && password === storedPassword) {
             loginDiv.classList.add('hidden');
-            websiteDiv.style.display = 'block';
+            websiteDiv.classList.remove('hidden');
         } else {
             alert('Invalid username or password. Please try again.');
         }
@@ -62,22 +56,33 @@ document.addEventListener('DOMContentLoaded', function() {
     openWebsiteBtn.addEventListener('click', function() {
         const websiteUrl = websiteUrlInput.value.trim();
         if (websiteUrl !== '') {
+            // Save visited site to history
+            let history = JSON.parse(localStorage.getItem('history')) || [];
+            history.push(websiteUrl);
+            localStorage.setItem('history', JSON.stringify(history));
+            // Open website in new tab
             window.open(websiteUrl, '_blank');
+            // Update history list
+            updateHistoryList();
         }
     });
 
-    resetAppBtn.addEventListener('click', function() {
-        if (confirm('Are you sure you want to reset the app? This action will clear Your App Data (Remember This Will Only Reset Your username and Password Not the Site History That You visited)')) {
-            // Clear user credentials
-            localStorage.removeItem('username');
-            localStorage.removeItem('password');
-            // Redirect to register page
-            loginDiv.classList.add('hidden');
-            registerDiv.classList.remove('hidden');
-            // Hide settings button and websiteDiv
-            settingsBtn.style.display = 'none';
-            websiteDiv.style.display = 'none';
-            alert('App reset successful. Please register again.');
+    clearHistoryBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear your browsing history?')) {
+            localStorage.removeItem('history');
+            updateHistoryList();
         }
     });
+
+    function updateHistoryList() {
+        let history = JSON.parse(localStorage.getItem('history')) || [];
+        historyList.innerHTML = '';
+        history.forEach(function(site) {
+            const li = document.createElement('li');
+            li.textContent = site;
+            historyList.appendChild(li);
+        });
+    }
+
+    updateHistoryList();
 });
